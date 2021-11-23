@@ -24,7 +24,7 @@ namespace RESTApi.Model
         [Column("refresh_token")]
         public string RefreshToken {get; set;}
 
-        [Column("resfresh_token_expiry_time")]
-        public DateTime ResfreshTokenExpiryTupe {get; set;}
+        [Column("refresh_token_expiry_time")]
+        public DateTime ResfreshTokenExpiryTime {get; set;}
     }
 }

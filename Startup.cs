@@ -18,15 +18,24 @@ using RESTApi.HyperMedia.Filters;
 using RESTApi.HyperMedia.Enricher;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Rewrite;
+using RESTApi.Services;
+using RESTApi.Services.Implementations;
+using RESTApi.Repository.Generic;
+using RESTApi.Configurations;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RESTApi
 {
     public class Startup
     {
-       
+
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment Environment {get;}
-  
+        public IWebHostEnvironment Environment { get; }
+
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -38,7 +47,42 @@ namespace RESTApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options => options.AddDefaultPolicy(builder =>{
+
+            var tokenConfigurations = new TokenConfigurations();
+
+            new ConfigureFromConfigurationOptions<TokenConfigurations>(
+                Configuration.GetSection("TokenConfigurations")
+            )
+            .Configure(tokenConfigurations);
+
+            services.AddSingleton(tokenConfigurations);
+
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(Options =>
+            {
+                Options.TokenValidationParameters = new TokenValidationParameters
+                {   
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenConfigurations.Issuer,
+                    ValidAudience = tokenConfigurations.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfigurations.Secret))
+                };
+            });
+
+            services.AddAuthorization(auth => {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser().Build());
+            });
+
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+            {
                 builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
@@ -47,21 +91,22 @@ namespace RESTApi
 
             services.AddControllers();
             services.AddSwaggerGen();
-            
+
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
             services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
 
-          
 
-            if(Environment.IsDevelopment())
+
+            if (Environment.IsDevelopment())
             {
                 MigrationsDatabase(connection);
             }
-            
+
             services.AddApiVersioning();
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1",
                 new OpenApiInfo
                 {
                     Title = "Rest API's with ASP .NET Core 5",
@@ -78,9 +123,14 @@ namespace RESTApi
             //DependencyInject
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+            services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
-            services.AddMvc(options => 
+            services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
@@ -109,10 +159,11 @@ namespace RESTApi
             app.UseRouting();
 
             app.UseCors();
-            
+
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>{
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "REST API'S with ASP .NET Core 5 - v1");
 
             });
@@ -127,7 +178,7 @@ namespace RESTApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapControllerRoute("DefaultApi","{controller=values}/{id?}");
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }
         private void MigrationsDatabase(string connection)
@@ -137,7 +188,7 @@ namespace RESTApi
                 var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connection);
                 var evolve = new Evolve.Evolve(evolveConnection, msg => Log.Information(msg))
                 {
-                    Locations = new List<string> {"db/migrations", "db/dataset"},
+                    Locations = new List<string> { "db/migrations", "db/dataset" },
                     IsEraseDisabled = true,
                 };
                 evolve.Migrate();

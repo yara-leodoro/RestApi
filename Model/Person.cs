@@ -3,19 +3,19 @@ using RESTApi.Model.Base;
 
 namespace RESTApi.Model
 {
-    [Table("persons")]
+    [Table("person")]
     public class Person : BaseEntity
     {
-        [Column("FirstName")]
+        [Column("first_name")]
         public string FirstName { get; set; }
 
-        [Column("LastName")]
+        [Column("last_name")]
         public string LastName { get; set; }
 
-        [Column("Address")]
+        [Column("address")]
         public string Address { get; set; }
 
-        [Column("Gender")]
+        [Column("gender")]
         public string Gender { get; set; }
 
     }

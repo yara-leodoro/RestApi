@@ -4,11 +4,13 @@ using RESTApi.Model.VO;
 using RESTApi.Bunisses;
 using RESTApi.HyperMedia.Filters;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RESTApi.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class BookController : ControllerBase
     {
