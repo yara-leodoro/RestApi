@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.Filters;
-using apiRest.HyperMedia.Abstract;
+using RESTApi.HyperMedia.Abstract;
 
-namespace apiRest.HyperMedia
+namespace RESTApi.HyperMedia
 {
     public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportHyperMedia
     {

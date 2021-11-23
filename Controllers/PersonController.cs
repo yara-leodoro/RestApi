@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using apiRest.Business;
-using apiRest.Data.VO;
-using apiRest.HyperMedia.Filters;
+using RESTApi.Business;
+using RESTApi.Data.VO;
+using RESTApi.HyperMedia.Filters;
 using System.Collections.Generic;
 
-namespace apiRest.Controllers
+namespace RESTApi.Controllers
 {
     [ApiVersion("1")]
     [ApiController]

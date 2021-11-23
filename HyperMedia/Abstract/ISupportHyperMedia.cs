@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace apiRest.HyperMedia.Abstract
+namespace RESTApi.HyperMedia.Abstract
 {
     public interface ISupportHyperMedia
     {

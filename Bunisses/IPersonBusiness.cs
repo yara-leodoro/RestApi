@@ -1,7 +1,7 @@
-using apiRest.Data.VO;
+using RESTApi.Data.VO;
 using System.Collections.Generic;
 
-namespace apiRest.Business
+namespace RESTApi.Business
 {
     public interface IPersonBusiness
     {

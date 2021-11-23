@@ -1,7 +1,7 @@
-using apiRest.Model.Base;
+using RESTApi.Model.Base;
 using System.Collections.Generic;
 
-namespace apiRest.Repository
+namespace RESTApi.Repository
 {
     public interface IRepository<T> where T : BaseEntity
     {

@@ -1,4 +1,4 @@
-namespace apiRest.HyperMedia.Constants
+namespace RESTApi.HyperMedia.Constants
 {
     public class ResponseTypeFromatter
     {

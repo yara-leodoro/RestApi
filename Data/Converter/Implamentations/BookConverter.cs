@@ -1,10 +1,10 @@
 using System.Linq;
-using apiRest.Model;
+using RESTApi.Model;
 using System.Collections.Generic;
-using apiRest.Data.Converter.Contract;
-using apiRest.Model.VO;
+using RESTApi.Data.Converter.Contract;
+using RESTApi.Model.VO;
 
-namespace apiRest.Data.Converter.Implamentations
+namespace RESTApi.Data.Converter.Implamentations
 {
     public class BookConverter : IParser<Book, BookVO>, IParser<BookVO, Book>
     {

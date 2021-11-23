@@ -1,10 +1,9 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace apiRest.HyperMedia.Filters
+namespace RESTApi.HyperMedia.Filters
 {
     public class HyperMediaFilters : ResultFilterAttribute
     {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using apiRest.HyperMedia;
-using apiRest.HyperMedia.Abstract;
+using RESTApi.HyperMedia;
+using RESTApi.HyperMedia.Abstract;
 
-namespace apiRest.Data.VO
+namespace RESTApi.Data.VO
 {
     public class PersonVO : ISupportHyperMedia
     {

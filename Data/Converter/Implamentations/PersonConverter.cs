@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using apiRest.Data.Converter.Contract;
-using apiRest.Data.VO;
-using apiRest.Model;
+using RESTApi.Data.Converter.Contract;
+using RESTApi.Data.VO;
+using RESTApi.Model;
 
-namespace apiRest.Data.Converter.Implamentations
+namespace RESTApi.Data.Converter.Implamentations
 {
     public class PersonConverter : IParser<PersonVO, Person>, IParser<Person, PersonVO>
     {

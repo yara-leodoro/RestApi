@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace apiRest.Model.Context
+namespace RESTApi.Model.Context
 {
     public class MySQLContext : DbContext
     {

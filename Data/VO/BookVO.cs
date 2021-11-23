@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using apiRest.HyperMedia;
-using apiRest.HyperMedia.Abstract;
+using RESTApi.HyperMedia;
+using RESTApi.HyperMedia.Abstract;
 
-namespace apiRest.Model.VO
+namespace RESTApi.Model.VO
 {
     public class BookVO : ISupportHyperMedia
     {

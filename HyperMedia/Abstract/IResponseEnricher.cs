@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace apiRest.HyperMedia.Abstract
+namespace RESTApi.HyperMedia.Abstract
 {
     public interface IResponseEnricher
     {

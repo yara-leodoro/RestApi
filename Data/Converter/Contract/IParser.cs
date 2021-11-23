@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace apiRest.Data.Converter.Contract
+namespace RESTApi.Data.Converter.Contract
 {
     public interface IParser<O, D>
     {

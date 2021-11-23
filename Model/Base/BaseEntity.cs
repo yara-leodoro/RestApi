@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace apiRest.Model.Base
+namespace RESTApi.Model.Base
 {
     public class BaseEntity
     {

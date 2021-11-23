@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using apiRest.Model.VO;
+using RESTApi.Model.VO;
 
-namespace apiRest.Bunisses
+namespace RESTApi.Bunisses
 {
     public interface IBookBusiness
     {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using apiRest.Data.Converter.Implamentations;
-using apiRest.Data.VO;
-using apiRest.Model;
-using apiRest.Repository;
+using RESTApi.Data.Converter.Implamentations;
+using RESTApi.Data.VO;
+using RESTApi.Model;
+using RESTApi.Repository;
 
-namespace apiRest.Business.Implementations
+namespace RESTApi.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {

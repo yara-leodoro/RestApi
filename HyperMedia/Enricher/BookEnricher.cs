@@ -1,10 +1,10 @@
 using System.Text;
 using System.Threading.Tasks;
-using apiRest.HyperMedia.Constants;
-using apiRest.Model.VO;
+using RESTApi.HyperMedia.Constants;
+using RESTApi.Model.VO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace apiRest.HyperMedia.Enricher
+namespace RESTApi.HyperMedia.Enricher
 {
     public class BookEnricher : ContentResponseEnricher<BookVO>
     {

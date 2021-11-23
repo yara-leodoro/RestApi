@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace apiRest.HyperMedia
+namespace RESTApi.HyperMedia
 {
     public class HyperMediaLink
     {

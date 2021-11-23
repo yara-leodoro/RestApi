@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using apiRest.Model.Base;
+using RESTApi.Model.Base;
 
-namespace apiRest.Model
+namespace RESTApi.Model
 {
     [Table("books")]
     public class Book : BaseEntity

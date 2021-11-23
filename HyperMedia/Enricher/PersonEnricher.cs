@@ -1,11 +1,11 @@
 using System.Text;
 using System.Threading.Tasks;
-using apiRest.Data.VO;
-using apiRest.HyperMedia.Constants;
+using RESTApi.Data.VO;
+using RESTApi.HyperMedia.Constants;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace apiRest.HyperMedia.Enricher
+namespace RESTApi.HyperMedia.Enricher
 {
     public class PersonEnricher : ContentResponseEnricher<PersonVO>
     {

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using apiRest.Model.Base;
-using apiRest.Model.Context;
+using RESTApi.Model.Base;
+using RESTApi.Model.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace apiRest.Repository
+namespace RESTApi.Repository
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {

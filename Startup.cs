@@ -3,23 +3,23 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using apiRest.Business;
-using apiRest.Repository;
-using apiRest.Model.Context;
+using RESTApi.Business;
+using RESTApi.Repository;
+using RESTApi.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using apiRest.Bunisses;
-using apiRest.Bunisses.Implementations;
-using apiRest.Business.Implementations;
+using RESTApi.Bunisses;
+using RESTApi.Bunisses.Implementations;
+using RESTApi.Business.Implementations;
 using Microsoft.Net.Http.Headers;
-using apiRest.HyperMedia.Filters;
-using apiRest.HyperMedia.Enricher;
+using RESTApi.HyperMedia.Filters;
+using RESTApi.HyperMedia.Enricher;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Rewrite;
 
-namespace apiRest
+namespace RESTApi
 {
     public class Startup
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using apiRest.HyperMedia.Abstract;
+using RESTApi.HyperMedia.Abstract;
 
-namespace apiRest.HyperMedia.Filters
+namespace RESTApi.HyperMedia.Filters
 {
     public class HyperMediaFilterOptions
     {
