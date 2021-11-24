@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RESTApi.Data.Converter.Implamentations;
+using RESTApi.HyperMedia.Utils;
 using RESTApi.Model;
 using RESTApi.Model.VO;
 using RESTApi.Repository;
@@ -17,16 +18,36 @@ namespace RESTApi.Bunisses.Implementations
             _repository = repository;
             _converter = new BookConverter();
         }
-        public List<BookVO > FindAll()
+        public PagedSearchVO<BookVO> FindWithPagedSearch(string name, string sortDirection, int pageSize, int page)
         {
-            return _converter.Parser(_repository.FindAll());
-        }
+            var sort = (!string.IsNullOrWhiteSpace(sortDirection) && sortDirection.Equals("desc")) ? "asc" : "desc";
+            var size = (pageSize < 1) ? 10 : pageSize;
+            var offset = page > 0 ? (page - 1) * size : 0;
 
-        public BookVO  FindById(long id)
+            string query = @"select * from books b where 1 = 1 ";
+            if (!string.IsNullOrWhiteSpace(name)) query = query + $" and b.author like '%{name}%' ";
+            query += $" order by b.author {sort} limit {size} offset {offset}";
+
+            string countQuery = @"select count(*) from books b where 1 = 1 ";
+            if (!string.IsNullOrWhiteSpace(name)) countQuery = countQuery + $" and b.author like '%{name}%' ";
+
+            var books = _repository.FindWithPageSearch(query);
+            int totalResults = _repository.GetCount(countQuery);
+
+            return new PagedSearchVO<BookVO>
+            {
+                CurrentPage = page,
+                List = _converter.Parser(books),
+                PageSize = size,
+                SortDirections = sort,
+                TotalResult = totalResults
+            };
+        }
+        public BookVO FindById(long id)
         {
             return _converter.Parser(_repository.FindyById(id));
         }
-        public BookVO  Create(BookVO book)
+        public BookVO Create(BookVO book)
         {
             var bookEntity = _converter.Parser(book);
             bookEntity = _repository.Create(bookEntity);

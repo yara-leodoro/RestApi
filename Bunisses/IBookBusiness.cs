@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RESTApi.HyperMedia.Utils;
 using RESTApi.Model.VO;
 
 namespace RESTApi.Bunisses
@@ -7,7 +8,8 @@ namespace RESTApi.Bunisses
     {
         BookVO Create(BookVO book);
         BookVO FindById(long id);
-        List<BookVO> FindAll();
+
+        PagedSearchVO<BookVO> FindWithPagedSearch(string name, string sortDirection, int pageSize, int page);
         BookVO Update(BookVO book);
         void Delete(long id);
     }

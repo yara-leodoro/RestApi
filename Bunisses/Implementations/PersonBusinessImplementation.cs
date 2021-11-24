@@ -18,10 +18,6 @@ namespace RESTApi.Business.Implementations
             _repository = repository;
             _converter = new PersonConverter();
         }
-        public List<PersonVO> FindAll()
-        {
-            return _converter.Parser(_repository.FindAll());
-        }
 
         public PersonVO FindyById(long id)
         {
@@ -57,7 +53,7 @@ namespace RESTApi.Business.Implementations
 
         }
 
-        public PagedSearchVO<PersonVO> findWithPagedSearch(string name, string sortDirection, int pageSize, int page)
+        public PagedSearchVO<PersonVO> FindWithPagedSearch(string name, string sortDirection, int pageSize, int page)
         {
             var sort = (!string.IsNullOrWhiteSpace(sortDirection) && sortDirection.Equals("desc")) ? "asc" : "desc";
             var size = (pageSize < 1) ? 10 : pageSize;
@@ -71,7 +67,7 @@ namespace RESTApi.Business.Implementations
             if (!string.IsNullOrWhiteSpace(name)) countQuery = countQuery + $" and p.first_name like '%{name}%' ";
 
             var persons = _repository.FindWithPageSearch(query);
-            int totalResults = _repository.getCount(countQuery);
+            int totalResults = _repository.GetCount(countQuery);
 
             return new PagedSearchVO<PersonVO>
             {

@@ -32,7 +32,7 @@ namespace RESTApi.Controllers
         [TypeFilter(typeof(HyperMediaFilters))]
         public IActionResult Get([FromQuery] string name, string sortDirection, int pageSize, int page)
         {
-            return Ok(_personBusiness.findWithPagedSearch(name, sortDirection, pageSize, page));
+            return Ok(_personBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page));
 
         }
 

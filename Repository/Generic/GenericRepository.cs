@@ -93,7 +93,7 @@ namespace RESTApi.Repository
             return dataset.FromSqlRaw<T>(query).ToList();
         }
 
-        public int getCount(string query)
+        public int GetCount(string query)
         {
             var result = "";
             using (var connection = _context.Database.GetDbConnection())
