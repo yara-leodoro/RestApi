@@ -127,6 +127,7 @@ namespace RESTApi
 
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 

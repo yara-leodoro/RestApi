@@ -3,15 +3,16 @@ using RESTApi.Data.Converter.Implamentations;
 using RESTApi.Data.VO;
 using RESTApi.Model;
 using RESTApi.Repository;
+using RESTApi.Repository.Generic;
 
 namespace RESTApi.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
         private readonly PersonConverter _converter;
 
-        public PersonBusinessImplementation(IRepository<Person> repository)
+        public PersonBusinessImplementation(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -39,11 +40,17 @@ namespace RESTApi.Business.Implementations
             personEntity = _repository.Update(personEntity);
             return _converter.Parser(personEntity);
         }
+        public PersonVO Disable(long id)
+        {
+            var personEntity = _repository.Disable(id);
+            return _converter.Parser(personEntity);
+        }
 
         public void Delete(long id)
         {
            _repository.Delete(id);
 
         }
+
     }
 }

@@ -40,6 +40,13 @@ namespace RESTApi.HyperMedia.Enricher
                 Type = ResponseTypeFromatter.DefaultPut
             });
 
+            content.Links.Add(new HyperMediaLink()
+            {
+                Action = HttpActionVerb.PATCH,
+                Href = link,
+                Rel = RelationType.self,
+                Type = ResponseTypeFromatter.DefaultPatch
+            });
 
             content.Links.Add(new HyperMediaLink()
             {
