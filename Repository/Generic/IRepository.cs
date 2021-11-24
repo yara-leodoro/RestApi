@@ -11,5 +11,7 @@ namespace RESTApi.Repository
         T Update(T item);
         void Delete(long id);
         bool Exists(long id);
+        List<T> FindWithPageSearch(string query);
+        int getCount(string query);
     }
 }

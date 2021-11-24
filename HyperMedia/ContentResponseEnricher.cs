@@ -6,6 +6,8 @@ using System.Collections.Concurrent;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.Filters;
 using RESTApi.HyperMedia.Abstract;
+using RESTApi.HyperMedia.Utils;
+using System.Linq;
 
 namespace RESTApi.HyperMedia
 {
@@ -17,7 +19,7 @@ namespace RESTApi.HyperMedia
         }
         public bool CanEnrich(Type contentType)
         {
-            return contentType == typeof(T) || contentType == typeof(List<T>);
+            return contentType == typeof(T) || contentType == typeof(List<T>) ||  contentType == typeof(PagedSearchVO<T>);
         }
 
         protected abstract Task EnrichModel(T content, IUrlHelper urlHelper);
@@ -40,6 +42,13 @@ namespace RESTApi.HyperMedia
                 {
                     ConcurrentBag<T> bag = new ConcurrentBag<T>(coollection);
                     Parallel.ForEach(bag, (element) =>
+                    {
+                        EnrichModel(element, urlHelper);
+                    });
+                }
+                else if (okObjectResult.Value is PagedSearchVO<T> pagedSearch)
+                {
+                    Parallel.ForEach(pagedSearch.List.ToList(), (element) =>
                     {
                         EnrichModel(element, urlHelper);
                     });

@@ -1,4 +1,5 @@
 using RESTApi.Data.VO;
+using RESTApi.HyperMedia.Utils;
 using System.Collections.Generic;
 
 namespace RESTApi.Business
@@ -7,8 +8,10 @@ namespace RESTApi.Business
     {
         PersonVO Create(PersonVO person);
         PersonVO FindyById(long id);
+        List<PersonVO> findByName(string firstName, string lastName);
         List<PersonVO> FindAll();
-        PersonVO Update(PersonVO  person);
+        PagedSearchVO<PersonVO> findWithPagedSearch(string name, string sortDirection, int pageSize, int page);
+        PersonVO Update(PersonVO person);
         PersonVO Disable(long id);
         void Delete(long id);
     }
