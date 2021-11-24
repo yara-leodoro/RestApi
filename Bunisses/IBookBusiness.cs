@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using RESTApi.HyperMedia.Utils;
 using RESTApi.Model.VO;
 

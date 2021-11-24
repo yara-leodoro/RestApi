@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using RESTApi.Data.Converter.Implamentations;
 using RESTApi.Data.VO;
 using RESTApi.HyperMedia.Utils;
-using RESTApi.Model;
-using RESTApi.Repository;
 using RESTApi.Repository.Generic;
 
 namespace RESTApi.Business.Implementations

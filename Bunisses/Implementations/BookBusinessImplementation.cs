@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using RESTApi.Data.Converter.Implamentations;
 using RESTApi.HyperMedia.Utils;
 using RESTApi.Model;
