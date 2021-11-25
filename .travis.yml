@@ -1,27 +1,20 @@
 sudo: required
 dist: bionic
-languagem: csharp
+language: csharp
 mono: none
-dotnet: 5.0
+dotnet: 2.0.0
 services: docker
-before_install: 
-  - .
-  - echo "We are in the rigth folder!"
 
 script:
   - docker-compose build
-
 before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-
 deploy:
   provider: script
-  script: 
-    docker tag rest-with-asp-net-db:$TRAVIS_JOB_ID DOCKER_USERNAME/rest-with-asp-net-db:$TRAVIS_JOB_ID;
-    docker tag rest-with-asp-net:$TRAVIS_JOB_ID DOCKER_USERNAME/rest-with-asp-net:$TRAVIS_JOB_ID;
-    docker push DOCKER_USERNAME/rest-with-asp-net:$TRAVIS_JOB_ID;
-    docker push DOCKER_USERNAME/rest-with-asp-net-db:$TRAVIS_JOB_ID;
+  script:
+    docker tag api-asp-net-core-5:latest $DOCKER_USERNAME/api-asp-net-core-5:latest;
+    docker push $DOCKER_USERNAME/api-asp-net-core-5:latest;
   on:
-    branch: master
+    brach: master
 notifications:
   email: false
