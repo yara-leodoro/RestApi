@@ -99,10 +99,10 @@ namespace RESTApi
 
 
 
-            if (Environment.IsDevelopment())
-            {
-                MigrationsDatabase(connection);
-            }
+            // if (Environment.IsDevelopment())
+            // {
+            //     MigrationsDatabase(connection);
+            // }
 
             services.AddApiVersioning();
 
