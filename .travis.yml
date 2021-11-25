@@ -1,20 +1,24 @@
 sudo: required
 dist: bionic
-language: csharp
+languagem: csharp
 mono: none
-dotnet: 2.0.0
+dotnet: 5.0
 services: docker
 
 script:
   - docker-compose build
+
 before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+
 deploy:
   provider: script
-  script:
-    docker tag api-asp-net-core-5:latest $DOCKER_USERNAME/api-asp-net-core-5:latest;
-    docker push $DOCKER_USERNAME/api-asp-net-core-5:latest;
+  script: 
+    docker tag rest-with-asp-net-db:$TRAVIS_JOB_ID DOCKER_USERNAME/rest-with-asp-net-db:$TRAVIS_JOB_ID;
+    docker tag rest-with-asp-net:$TRAVIS_JOB_ID DOCKER_USERNAME/rest-with-asp-net:$TRAVIS_JOB_ID;
+    docker push DOCKER_USERNAME/rest-with-asp-net:$TRAVIS_JOB_ID;
+    docker push DOCKER_USERNAME/rest-with-asp-net-db:$TRAVIS_JOB_ID;
   on:
-    brach: master
+    branch: master
 notifications:
   email: false
