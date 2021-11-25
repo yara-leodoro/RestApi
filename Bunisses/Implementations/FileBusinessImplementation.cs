@@ -31,10 +31,10 @@ namespace RESTApi.Bunisses.Implementations
             var fileType = Path.GetExtension(file.FileName);
             var baseUrl = _context.HttpContext.Request.Host;
 
-            if (fileType.ToLower() == ".pdf" || fileType.ToLower() == ".jpg" ||
-                fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
+            if (fileType.ToLower() == ".pdf" || fileType.ToLower() == ".jpg" || fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
             {
                 var docName = Path.GetFileName(file.FileName);
+                
                 if (file != null && file.Length > 0)
                 {
                     var destination = Path.Combine(_basePath, "", docName);

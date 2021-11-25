@@ -14,7 +14,7 @@ namespace RESTApi.Controllers
     [ApiController]
     [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
-    public class FileController : ControllerBase
+    public class FileController : Controller
     {
         private readonly IFileBusiness _fileBusiness;
 
@@ -25,7 +25,7 @@ namespace RESTApi.Controllers
 
         [HttpGet("download/{fileName}")]
         [ProducesResponseType((200), Type = typeof(byte[]))]
-        [ProducesResponseType((204), Type = typeof(byte[]))]
+        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [Produces("application/octet-stream")]
