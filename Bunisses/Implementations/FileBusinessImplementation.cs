@@ -19,7 +19,8 @@ namespace RESTApi.Bunisses.Implementations
 
         public byte[] GetFile(string fileName)
         {
-            throw new System.NotImplementedException();
+            var filePath = _basePath + fileName;
+            return File.ReadAllBytes(filePath);
         }
 
         public async Task<FileDetailVO> SaveFileToDisk(IFormFile file)
