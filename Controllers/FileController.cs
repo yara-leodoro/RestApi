@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,15 +21,27 @@ namespace RESTApi.Controllers
         {
             _fileBusiness = fileBusiness;
         }
-        
+
         [HttpPost("uploadFile")]
         [ProducesResponseType((200), Type = typeof(FileDetailVO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [Produces("application/json")]
         public async Task<IActionResult> UploadOneFile([FromForm] IFormFile file)
         {
-            FileDetailVO detail = await _fileBusiness.saveFileToDisk(file);
+            FileDetailVO detail = await _fileBusiness.SaveFileToDisk(file);
             return new OkObjectResult(detail);
+        }
+
+        [HttpPost("uploadMultipleFiles")]
+        [ProducesResponseType((200), Type = typeof(List<FileDetailVO>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [Produces("application/json")]
+        public async Task<IActionResult> UploadMultipleFiles([FromForm] List<IFormFile> files)
+        {
+            List<FileDetailVO> details = await _fileBusiness.SaveFilesToDisk(files);
+            return new OkObjectResult(details);
         }
     }
 }

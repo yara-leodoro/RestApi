@@ -21,34 +21,41 @@ namespace RESTApi.Bunisses.Implementations
         {
             throw new System.NotImplementedException();
         }
-        public async Task<FileDetailVO> saveFileToDisk(IFormFile file)
+
+        public async Task<FileDetailVO> SaveFileToDisk(IFormFile file)
         {
+          
             FileDetailVO fileDetail = new FileDetailVO();
 
             var fileType = Path.GetExtension(file.FileName);
             var baseUrl = _context.HttpContext.Request.Host;
-            if(fileType.ToLower() == ".pdf" || fileType.ToLower() == ".jpg" || fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
+
+            if (fileType.ToLower() == ".pdf" || fileType.ToLower() == ".jpg" ||
+                fileType.ToLower() == ".png" || fileType.ToLower() == ".jpeg")
             {
                 var docName = Path.GetFileName(file.FileName);
-
-                if(file != null && file.Length > 0)
+                if (file != null && file.Length > 0)
                 {
                     var destination = Path.Combine(_basePath, "", docName);
-                    fileDetail.doucumentName = docName;
-                    fileDetail.doucumentType = fileType;
-                    fileDetail.doucumentUrl = Path.Combine(baseUrl + "/api/file/v1" + fileDetail.doucumentName);
+                    fileDetail.documentName = docName;
+                    fileDetail.documentType = fileType;
+                    fileDetail.documentUrl = Path.Combine(baseUrl + "/api/file/v1/" + fileDetail.documentName);
 
                     using var stream = new FileStream(destination, FileMode.Create);
-
                     await file.CopyToAsync(stream);
                 }
             }
             return fileDetail;
         }
 
-        public TaskCompletionSource<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> file)
+        public async Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> files)
         {
-            throw new System.NotImplementedException();
+            List<FileDetailVO> list = new List<FileDetailVO>();
+            foreach (var file in files)
+            {
+                list.Add(await SaveFileToDisk(file));
+            }
+            return list;
         }
 
     }

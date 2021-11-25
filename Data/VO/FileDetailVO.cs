@@ -2,8 +2,8 @@ namespace RESTApi.Data.VO
 {
     public class FileDetailVO
     {
-        public string doucumentName {get; set;}
-        public string doucumentType {get; set;}
-        public string doucumentUrl{get; set;}
+        public string documentName {get; set;}
+        public string documentType {get; set;}
+        public string documentUrl{get; set;}
     }
 }
